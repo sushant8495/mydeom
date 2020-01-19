@@ -9,9 +9,12 @@ namespace ReactJS
 {
     public class Startup
     {
+        public static string configurationConnection { get; set; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            //Set connection string as static
+            configurationConnection = Configuration.GetConnectionString("dbcon");
         }
 
         public IConfiguration Configuration { get; }
