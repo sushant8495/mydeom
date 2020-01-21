@@ -48,8 +48,9 @@ export class LoginForm extends Component {
                 .then(res => res.json())
                 .then((result) => {
                     if (!result)
-                        this.setState({ ErrorMessage : "Enter Correct User Name And Password" });
-                    alert(result);
+                        this.setState({ ErrorMessage: "Enter Correct User Name And Password" });
+                    else
+                        window.location.href = "/registration   ";
 
                 },
                     (error) => {

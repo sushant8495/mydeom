@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import './NavMenu.css';
 
 export class NavMenu extends Component {
@@ -8,10 +9,11 @@ export class NavMenu extends Component {
 
     constructor(props) {
         super(props);
-
+        let UserName = Cookies.get('UserName');
         this.toggleNavbar = this.toggleNavbar.bind(this);
         this.state = {
-            collapsed: true
+            collapsed: true,
+            UserName: UserName = "" ? "Login" : UserName +" Logout"
         };
     }
 
@@ -37,7 +39,7 @@ export class NavMenu extends Component {
                                     <NavLink tag={Link} className="text-dark" to="/">Products</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/login">Login</NavLink>
+                                    <NavLink tag={Link} className="text-dark" to="/login">{ this.state.UserName }</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/registration">Registor</NavLink>

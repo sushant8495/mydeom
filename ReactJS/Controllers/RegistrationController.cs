@@ -8,6 +8,7 @@ using ReactJS.DbClass;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Data;
+using Microsoft.AspNetCore.Http;
 
 namespace ReactJS.Controllers
 {
@@ -38,8 +39,16 @@ namespace ReactJS.Controllers
                 DataTable dataTable = registraionDB.UserLogin(registration);
                 if (dataTable.Rows.Count == 0)
                     return false;
-                else
+                else {
+                    CookieOptions cookieOptions = new CookieOptions();
+                    foreach (DataRow dr in dataTable.Rows)
+                    {
+                        Response.Cookies.Append("UserName", dr["UserName"].ToString());
+                        Response.Cookies.Append("RegistrationID", dr["RegistrationID"].ToString());
+                    }
+
                     return true;
+                }
             }
             catch (Exception ex)
             {
